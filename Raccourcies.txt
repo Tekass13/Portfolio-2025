@@ -1,0 +1,21 @@
+Selectionner le mot plusieurs fois:
+CTRL+D (par mot)
+
+Selectionner tout les même mots:
+CTRL+SHIFT+L
+
+Selectionner toute la ligne:
+CTLR+L
+
+Créer une interligne en gardant la position du curseur sur la même ligne:
+CTRL+SHIFT+ENTER
+
+Dupliquer la selection:
+CTRL+SHIFT+DOWN
+
+
+
+
+
+
+

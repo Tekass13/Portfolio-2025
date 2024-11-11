@@ -109,19 +109,21 @@ a {
     background: linear-gradient(340deg, rgba(196,102,65,1) 10%, rgba(194,116,77,1) 30%, rgba(198,136,96,1) 50%, rgba(218,179,137,1) 72%, rgba(255,255,221,1) 100%); 
 }
 
-.nav-bar {
+header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     min-height: 10vh;
+    background-color: var(--light);
+    box-shadow: 0 2px 20px var(--dark);
+    z-index: 10;
+}
+
+.nav-bar {  
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: var(--light);
-    box-shadow: 0 2px 20px var(--dark);
-    padding: 1em;
-    z-index: 10;
 }
 
 .logo {
@@ -194,7 +196,8 @@ a {
     margin-bottom: 2em;
 }
 
-.gallery {
+
+.galery-projets {
     display: grid;
     width: 100%;
     height: auto;
@@ -205,60 +208,104 @@ a {
     gap: 1em;
     width: clamp(50vh, 70%, 100%);
     padding: 1em;
-    border-radius: .3em;
     margin-top: 5em;
 }
 
-div:is(.cards1,
-.cards2,
-.cards3,
-.cards4,
-.cards5,
-.cards6,
-.cards7,
-.cards8){
-    border-radius: .2em;
+.galery-projets .cards1 {
+    grid-area: img1;
+}
+
+.galery-projets .cards2 {
+    grid-area: img2;
+}
+
+.galery-projets .cards3 {
+    grid-area: img3;
+}
+
+.galery-projets .cards4 {
+    grid-area: img4;
+}
+
+.galery-projets .cards5 {
+    grid-area: img5;
+}
+
+.galery-projets .cards6 {
+    grid-area:img6;
+}
+
+.galery-projets div,
+.galery-stack div {
+    border-radius: .5em;
     background-color: var(--dark);
     transition: .4s ease-in-out;
     padding: 1em;
 }
 
-.cards1 {
+.galery-stack {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-areas: 
+            "img1 img1 img2 img3 img3 "
+            "img4 img4 img2 img5 img5"
+            "img6 img6 img6 img5 img5";
+    gap: 1em;
+    width: clamp(50vh, 70%, 100%);
+    padding: 1em;
+    margin-top: 5em;
+    align-items: center;
+}
+
+.galery-stack .cards1 {
     grid-area: img1;
+    border: 4px ridge var(--light);
 }
 
-.cards2 {
+.galery-stack .cards2 {
     grid-area: img2;
+    border: 4px ridge var(--light);
 }
 
-.cards3 {
+.galery-stack .cards3 {
     grid-area: img3;
+    border: 4px ridge var(--light);
 }
 
-.cards4 {
+.galery-stack .cards4 {
     grid-area: img4;
+    border: 4px ridge var(--light);
 }
 
-.cards5 {
+.galery-stack .cards5 {
     grid-area: img5;
+    border: 4px ridge var(--light);
 }
 
-.cards6 {
+.galery-stack .cards6 {
     grid-area:img6;
+    border: 4px ridge var(--light);
 }
 
-.projet {
-    font-size: 10em;
-    color:var(--light);
+.icons-stack {
+    color: var(--darkOrange);
+    background-color: var(--light);
+    width: 100%;
+    margin-bottom: .5em;
 }
 
-.fa-arrow-down {
+.galery-stack div p{
+    color: white;
+}
+
+.fa-arrow-up {
     position: fixed;
-    bottom: 20%;
+    bottom: 15%;
     left: 50%;
     width: 1.5em;
     height: 1.5em;
-    background-color: var(--darkOrange);
+    background-color: var(--light);
     border-radius: 50%;
     padding: .2em;
     text-align: center;
@@ -371,7 +418,7 @@ i {
     transition: .2s;
 }
 
-div:is(.cards1,
+.galery-projets div:is(.cards1,
 .cards2,
 .cards3,
 .cards4,
@@ -384,15 +431,16 @@ div:is(.cards1,
     transition: .5s;
 }
 
-div:is(.cards1,
-.cards2,
-.cards3,
-.cards4,
-.cards5,
-.cards6,
-.cards7,
-.cards8):hover p {
-    text-shadow: 2px 2px 2px var(--darkOrange);
+.galery-stack div:hover {
+    transform: translateX(-.5em) translateY(-.5em);
+    transition: .5s;
+}
+
+.galery-stack div:hover p {
+    box-shadow: 0 0 10px var(--darkOrange);
+    background-color: rgba(255,255,255,.5);
+    color: black;
+    transition: .5s;
 }
 
 .submit:hover {
@@ -522,7 +570,7 @@ div:is(.cards1,
         opacity: 0;
     }
     to {
-        transform: translateY(1em);
+        transform: translateY(-1em);
         opacity: .8;
     }
 }
@@ -555,9 +603,18 @@ div:is(.cards1,
 .js-show {
     opacity: 1;
     filter: blur(0);
-    scale: 1;
     transform: translateY(0);
     transition-delay: .25s;
+}
+
+.js-header-scroll-hidden {
+    transform: translateY(-100%);
+    transition: .3s;
+}
+
+.js-footer-scroll-hidden {
+    transform: translateY(100%);
+    transition: .3s;
 }
 
 /*********************************

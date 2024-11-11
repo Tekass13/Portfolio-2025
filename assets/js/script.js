@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-    const arrowDOM = document.querySelector('.fa-arrow-down');
+    const arrowDOM = document.querySelector('.fa-arrow-up');
     const buttonThemeDOM = document.querySelector('.js-themes');
     const logoDOM = document.querySelectorAll('.js-logo-change');
 
@@ -11,14 +11,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const backgroundLightDOM = document.querySelectorAll('.js-bg-change-light');
     let darkTheme = false;
 
-    /****************************************************
-    *                ANIMATION BACKGROUND               *
-    ****************************************************/
+
     const canvasDOM = document.querySelector('#canvas1');
     const ctx = canvasDOM.getContext('2d');
     canvasDOM.width = window.innerWidth;
     canvasDOM.height = window.innerHeight;
     let particlesArray;
+
+    const headerDOM = document.querySelector('header');
+    const navDOM = document.querySelector('nav');
+    const menuDOM = document.querySelector('menu');
+    const footerDOM = document.querySelector('footer');
+    /****************************************************
+    *                ANIMATION BACKGROUND               *
+    ****************************************************/
 
     // Mouse position
     let mouse = {
@@ -114,19 +120,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
             particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
         }
     }
-    
-    // Animate particles
-    function animate() {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, innerWidth, innerHeight);
-
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update();
-        }
-        connect();
-    }
-    init();
-    animate();
 
     // Create a connection between each partiles
     function connect() {
@@ -152,6 +145,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
             }
         }
     }
+    
+    // Animate particles
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+        }
+        connect();
+    }
+    init();
+    animate();
 
     /****************************************************
     *                 MOUSE ANIMATION                  *
@@ -216,7 +222,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
      
      animateCircles();
      
-     /***************************************************
+    /****************************************************
     *                  ANIMATION ARTICLES               *
     ****************************************************/
 
@@ -234,12 +240,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
      const hiddenElements = document.querySelectorAll('.js-hidden');
      hiddenElements.forEach((e) => observer.observe(e));
 
-     /***************************************************
-    *                  ANIMATION ARROW                  *
+    /****************************************************
+    *                 ANIMATION SCROLL                  *
     ****************************************************/
 
       arrowDOM.addEventListener('click', () => {
-        window.scrollBy(0,800);
+        window.scrollBy(0,-3000);
+      });
+      
+      window.addEventListener('scroll', () => {
+        if (this.scrollY > 200 && this.scrollY < 3000) {
+            headerDOM.classList.add('js-header-scroll-hidden');
+            footerDOM.classList.add('js-footer-scroll-hidden');
+        }
+        else {
+            headerDOM.classList.remove('js-header-scroll-hidden');
+            footerDOM.classList.remove('js-footer-scroll-hidden');
+        }
       });
 
     /****************************************************
@@ -269,12 +286,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
         else {
             darkTheme = false;
         }
+
+        const logoLight = 'assets/images/logo-light.png';
         logoDOM.forEach(element => {
-            if (element.getAttribute('src') === 'assets/images/logo-light.png') {
+            if (element.getAttribute('src') === logoLight) {
                 element.setAttribute('src', 'assets/images/logo-dark.png');
             }
             else {
-                element.setAttribute('src', 'assets/images/logo-light.png');
+                element.setAttribute('src', logoLight);
             }
         });
     }
